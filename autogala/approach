@@ -1,0 +1,40 @@
+libraries used:
+keras,pandas,numpy,OpenCv and sklearn
+Data preprocessing:
+reshaped images to 50X50 and 3 channels . Later increased size to 150 because imput images were 80 in width so  chose size more than 80.
+Converted target variable to  categorical using keras.utils.
+and images were normlized by dividing imagearray by 255.0
+
+Basic CNN:
+3 layes CNN :
+with I could only acheive accuracy from 41 to 57 . Modifying layers / adding more layers did not improve accuracy from 57 
+
+so I decide to use data augmentation and transfer learning.
+
+Data Augmentation:
+Initailly I flipped images vertically too but loss did not reduced after sometime . so only kept horizontal flip.
+rotation_range=10,  # randomly rotate images in the range (degrees, 0 to 180)
+        zoom_range = 0.1, # Randomly zoom image 
+        width_shift_range=0.2,  # randomly shift images horizontally (fraction of total width)
+        height_shift_range=0.2,  # randomly shift images vertically (fraction of total height)
+        horizontal_flip=True,  # randomly flip images
+        vertical_flip=False
+
+Model:
+ Using Vgg16  got 63% accuracy on my validation set .
+Using Efficientnetb3 outperformed Vgg16. 
+Effecient net 3:
+weights: imagenet
+Compiling model:
+Optimizer:
+adam 
+callback: ReduceLRonPleateau 
+factor: 0.1
+patience:2
+Loos function: categorical_crossentropy
+epochs:20
+bacth_size:32
+
+
+
+
